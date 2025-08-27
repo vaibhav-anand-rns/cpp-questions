@@ -1,0 +1,20 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int firstuniquechar(string s){
+    unordered_map<char, int>m;
+    queue<int> Q;
+    for(int i=0; i< s.size(); i++){
+        if(.find(s[i] == m.end()){
+             q.push(i);
+            
+            
+        }
+        m[s[i]]++;
+        while(Q.size() > 0 && m[s[Q.front()]] > 1){
+            q.pop();
+            
+        }
+        return Q.empty();
+    }
+}

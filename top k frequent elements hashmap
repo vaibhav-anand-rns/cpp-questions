@@ -1,0 +1,25 @@
+class solution{
+public:
+      vector<int> topKFrequent(vector<int> &nums,int k){
+          unordered_map<int,int> counts;
+          priorityqueue<pair<int,int> greaterpair<int,int>> minheap;
+          for(auto i:nums){
+              counts[i]++;
+          }
+          for(auto & i: counts){
+              minheap.push(i.second,i.first);
+              if(minheap.size>k){
+                  min_heap.pop();
+              }
+              
+          }
+          vector<int> res;
+          while(k--){
+              res.push_back(minheap.top().second());
+              min_heap.pop();
+          }
+          return res;
+          
+      }
+    
+}

@@ -1,0 +1,21 @@
+#include <iostream>
+using namespace std;
+
+void printSubsequences(string s, string current = "", int index = 0) {
+    if (index == s.length()) {
+        cout << current << endl;  // Print the current subsequence
+        return;
+    }
+
+    // Include the current character
+    printSubsequences(s, current + s[index], index + 1);
+
+    // Exclude the current character
+    printSubsequences(s, current, index + 1);
+}
+
+int main() {
+    string s = "abc";
+    printSubsequences(s);
+    return 0;
+}

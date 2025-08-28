@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+
+void generateBinaryStrings(int n, string output, char lastChar) {
+    if (n == 0) {
+        cout << output << endl;
+        return;
+    }
+
+    // Always allowed to add '0'
+    generateBinaryStrings(n - 1, output + '0', '0');
+
+    // Only add '1' if last character was not '1'
+    if (lastChar != '1') {
+        generateBinaryStrings(n - 1, output + '1', '1');
+    }
+}
+
+int main() {
+    int n;
+    cout << "Enter the length of binary strings: ";
+    cin >> n;
+
+    cout << "Binary strings of length " << n << " without consecutive 1s:\n";
+    generateBinaryStrings(n, "", '0');  // Start with empty string and '0' as last character
+
+    return 0;
+}

@@ -1,0 +1,20 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+void generatewords(const string& digits,int index, string current){
+    
+    if(index == digits.length()){
+        cout << current << endl;
+        return;
+    }
+    int digit = digits[index] - '0';
+    if(digit < 0 || digit > 9 || keypad[digit].empty()){
+        generatewords(digits, index+1, current);
+        return;
+    }
+    for(char ch : keypad[digit]){
+        generatewords(digits,index+1,current+ch);
+        
+        
+    }
+}

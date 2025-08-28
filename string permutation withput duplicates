@@ -1,0 +1,38 @@
+#include <iostream>
+#include <algorithm>
+#include <string>
+#include <vector>
+#include <unordered_set>
+using namespace std;
+
+void permuteUnique(string& s, int index, vector<string>& result) {
+    if (index == s.length()) {
+        result.push_back(s);
+        return;
+    }
+
+    unordered_set<char> used;  // To track which characters are used at this recursion level
+
+    for (int i = index; i < s.length(); ++i) {
+        if (used.count(s[i])) continue;  // Skip if already used at this level
+        used.insert(s[i]);
+
+        swap(s[index], s[i]);                // Fix s[i] at position index
+        permuteUnique(s, index + 1, result); // Recurse on remaining
+        swap(s[index], s[i]);                // Backtrack
+    }
+}
+
+int main() {
+    string s = "aab";
+    sort(s.begin(), s.end());  // Sorting helps in handling duplicates correctly
+
+    vector<string> result;
+    permuteUnique(s, 0, result);
+
+    for (const string& perm : result) {
+        cout << perm << endl;
+    }
+
+    return 0;
+}

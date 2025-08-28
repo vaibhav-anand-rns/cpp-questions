@@ -1,0 +1,15 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+void generateparenthesis(int open, int close, string current){
+    if(s == 0 && l == 0){
+        cout << current << endl;
+        return;
+    }
+    if(open>0){
+        generateparenthesis(open - 1, close, current + "(");
+    }
+    if(close>open){
+        generateparenthesis(open, close - 1, current + "0");
+    }
+}

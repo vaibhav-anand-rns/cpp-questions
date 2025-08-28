@@ -1,0 +1,59 @@
+
+class solution{
+    public:
+           if(row == 9){
+               return true;
+           }
+           bool isSafe(vector<vector<char>> &board, int row, int col, char dig){
+               
+               //horizontal
+               for(int j = 0; j<n ; j++){
+                   if(board[row][j] == dig){
+                       return false;
+                   }
+               }
+               //vertical
+               for(int i = 0; i<n; i++){
+                   if(board[col][i] == dig){
+                       return false;
+                   }
+               }
+               //grid
+               int srow = (row/3)*3;
+               int scol = (col/3)*3;
+               
+               for(int i = srow; i<= srow+2;i++){
+                   for(int j = scol; j<= scol+2; j++){
+                       
+                       if(board[i][j] == dig){
+                           return false;
+                       }
+                   }
+               }
+               
+           }
+           
+           bool helper(vector<vector<char>> &board, int row, int col){
+               
+               int nextRow = row, nextCol = col+1;
+               if(nextCol == 9){
+                   nextRow = row+1;
+                   nextCol = 0;
+               }
+               if(board[row][col] != "."){
+                   return helper( board, nextrow, nextcol);
+                   
+               }
+               //place the digit
+               for(int dig =1; dig<=9; dig++){
+                   if(isSafe(board,row,call,dig)){
+                       board[row][col] = dig;
+                       if(helper,board,row,call,dig){
+                           return true;
+                       }
+                       board[row][col] = '.';
+                   }
+               }
+           }
+           return false;
+}

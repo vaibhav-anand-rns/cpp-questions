@@ -1,0 +1,25 @@
+#include <iostream>
+using namespace std;
+
+// Recursive function to return the nth Fibonacci number
+int fibonacci(int n) {
+    if (n <= 1)  // Base cases: fib(0) = 0, fib(1) = 1
+        return n;
+    else
+        return fibonacci(n - 1) + fibonacci(n - 2);  // Recursive calls
+}
+
+int main() {
+    int n;
+    cout << "Enter the position (n ≥ 0): ";
+    cin >> n;
+
+    if (n < 0) {
+        cout << "Fibonacci is not defined for negative numbers." << endl;
+    } else {
+        int result = fibonacci(n);
+        cout << "Fibonacci number at position " << n << " is " << result << endl;
+    }
+
+    return 0;
+}

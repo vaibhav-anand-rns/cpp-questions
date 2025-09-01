@@ -1,0 +1,48 @@
+#include <iostream>
+#include <vector>
+#include <numeric>
+#include <algorithm>
+using namespace std;
+
+class Solution {
+public:
+    bool canPartitionKSubsets(vector<int>& nums, int k) {
+        int totalSum = accumulate(nums.begin(), nums.end(), 0);
+
+        if (totalSum % k != 0) return false;
+
+        int target = totalSum / k;
+
+        sort(nums.rbegin(), nums.rend());  // Largest numbers first (prune faster)
+        vector<int> buckets(k, 0);
+
+        return backtrack(nums, 0, buckets, target);
+    }
+
+private:
+    bool backtrack(const vector<int>& nums, int index, vector<int>& buckets, int target) {
+        if (index == nums.size()) {
+            for (int i = 0; i < buckets.size(); ++i) {
+                if (buckets[i] != target) return false;
+            }
+            return true;
+        }
+
+        int curr = nums[index];
+
+        for (int i = 0; i < buckets.size(); ++i) {
+            if (buckets[i] + curr > target) continue;
+
+            buckets[i] += curr;
+
+            if (backtrack(nums, index + 1, buckets, target)) return true;
+
+            buckets[i] -= curr;  // backtrack
+
+            // Optimization: if current bucket is 0 after trying, no need to try further
+            if (buckets[i] == 0) break;
+        }
+
+        return false;
+    }
+};

@@ -1,0 +1,35 @@
+class solution{
+    public:
+           
+           bool wordbreak(string s, vector<string> &wordDict){
+               
+               unordered_set<string> dict(wordDict.begin(),wordDict.end());
+               vector<int>memo(s.length(), -1); // -1 = unvisted, 1= true
+               return backtrack(s,dict,memo,0);
+           }
+           
+    private:
+            
+            bool backtrack(const string& s, unordered_set<string>& dict, int start, vector<int>& memo,int end){
+                
+                if(start == s.length()){
+                    return true;
+                }
+                if(memo[start] != -1){
+                    return memo[start];
+                }
+                
+                for(int end = start+1; end <= s.length(); end++){
+                    
+                    string word = s.substr((start, end-start));
+                    if(dict.count(word) && backtrack(s,dict,memo,end)){
+                        
+                        memo[start] = 1;
+                        return true;
+                    }
+                }
+                memo[start] = 0;
+                return false;
+            }
+}   
+  

@@ -1,0 +1,42 @@
+class Solution {
+public:
+    vector<string> wordBreak(string s, vector<string>& wordDict) {
+        unordered_set<string> dict(wordDict.begin(), wordDict.end());
+        unordered_map<string, vector<string>> memo;
+        return backtrack(s, dict, memo);
+    }
+
+private:
+    vector<string> backtrack(string s, unordered_set<string>& dict,
+                             unordered_map<string, vector<string>>& memo) {
+        // If we already solved this subproblem, return the result
+        if (memo.count(s)) return memo[s];
+        
+        vector<string> result;
+
+        // If the whole string is a valid word, add it
+        if (dict.count(s)) {
+            result.push_back(s);
+        }
+
+        // Try every possible prefix
+        for (int i = 1; i < s.size(); ++i) {
+            string prefix = s.substr(0, i);  // left part
+            string suffix = s.substr(i);    // right part
+
+            if (dict.count(prefix)) {
+                // Recurse on suffix
+                vector<string> suffixWays = backtrack(suffix, dict, memo);
+
+                // Combine prefix with all possible suffix sentences
+                for (const string& sentence : suffixWays) {
+                    result.push_back(prefix + " " + sentence);
+                }
+            }
+        }
+
+        // Memoize the result before returning
+        memo[s] = result;
+        return result;
+    }
+};

@@ -1,0 +1,39 @@
+class solution{
+    public:
+          
+          bool searchmatrix(vector<vector<int>> &matrix, int target){
+              
+              if(matrix.empty() && matrix[0].empty()){
+                  
+                  return false;// nothing is there to search
+              }
+              
+              
+              int rows = matrix.size();
+              int cols = matrix[0].size();
+              
+              int left = 0;
+              int right = rows*cols - 1;
+              
+              while(left<=right){
+                  
+                  int mid = left+(right-left)/2;
+                  // map 1D matrix too 2D matrix
+                  
+                  int midElement = matrix[mid / cols][mid % cols];
+                   if(mid element == target){
+                       
+                       return true;
+                   }
+                   
+                   if(mid element<= target){
+                       left = mid+1;
+                   }
+                   
+                   right = mid-1;
+
+              }
+              return false;
+              
+          }
+}

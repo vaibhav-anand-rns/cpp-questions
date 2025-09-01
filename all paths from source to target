@@ -1,0 +1,35 @@
+class solution{
+    public:
+          vector<vector<int>> allpathsourcetarget(vector<vector<int>>  & graph){
+              vector<vector<int>> result;
+              vector<int> path;
+              dfs(graph,path,result);
+              return result;
+              
+          }
+          
+    private:
+          void dfs(const vector<vector<int>>& graph, int node,
+             vector<int>& path, vector<vector<int>>& result) {
+                 
+                 
+                 path.push_back(node); // add current node
+                 
+                 if(node == graph.size() - 1){
+                     result.push_back(path); // reached the target
+                 }
+                 
+                 else{
+                     for(int neighbour : graph[node]){
+                         
+                         dfs(graph,neighbour,path,result);
+                         
+                     }
+                 }
+                 
+                 path.pop_back();
+                 
+                 
+        
+          
+}

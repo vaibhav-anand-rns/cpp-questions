@@ -1,0 +1,47 @@
+class solution{
+    public:
+           bool makesquare(vector<int> &matchsticks){
+               
+               int total = 0;
+               for(int len : matchsticks){
+                   total += len;
+               }
+               
+               if(total % 4 != 0){
+                   return false;
+               }
+               int target = total/4;
+               sort(matchsticksr.begin(),matchsticksr.end());
+               
+               vector<int>> sides(4,0);
+               return backtrack(0,matchsticks,side,target);
+           }
+           
+    private:
+            bool backtrack(const vector<int>& matchsticks, int index, vector<int>& sides, int target){
+                
+                if(index == matchsticks.size()){
+                    
+                    return sides[0] == target && sides[1] == target && sides[2] == target && sides[3] == target;
+                }
+                
+                int curr = matchsticks[index];
+                for(int i = 0; i<4; i++){
+                    
+                    if(sides[i]+ curr> target){
+                        continue;
+                    }
+                    
+                    sides[i] += curr;
+                    if (backtrack(matchsticks, index + 1, sides, target)){
+                        return true;
+                    }
+                    
+                    sides[i] -= curr; //backtrack
+                    
+                    if(side[i] == 0){
+                        break;
+                    }
+                }
+            }
+}

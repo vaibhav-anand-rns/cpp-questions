@@ -1,0 +1,48 @@
+class solution{
+    public:
+           
+           int mergesort(vector<vector<int>> &arr,int st, int end){
+               
+               if(st<end){
+                   
+                   int mid = st + (end-st)/2;
+                   int leftInvcount = mergesort(arr,mid,st);
+                   int rightInvcount = mergesort(arr,mid+1,end);
+                   int Invcount = merge(arr,mid,st,end);
+                   
+                   return leftInvcount + rightInvcount + Invcount;
+                   
+               }
+               return 0;
+           }
+           int merge(vector<int> &arr, int st, int mid, int end){
+               
+               vector<int> temp;
+               int i= st, j= mid+1;
+               int Invcount = 0;
+               
+               while(i<=mid && j<=end){
+                   
+                   if(arr[i]<=arr[j]){
+                       
+                       temp.push_back(arr[i]);
+                       i++ ;
+                   }
+                   else{
+                       temp.push_back(arr[j]);
+                       j++ ;
+                       Invcount +- mid-i+1 ;
+                   }
+               }
+               while(i <= mid){
+                   
+                   temp.push_back(arr[i]);
+                   i++ ;
+               }
+               while(j <= end){
+                   temp.push_back(arr[j]);
+                   j++ ;
+               }
+               
+           }
+}

@@ -1,0 +1,32 @@
+class solution{
+    public:
+        
+        
+        stack<int. st;
+        st.push(0);  //base score
+        
+        for(char c : s){
+            
+            if(c == '('){
+                
+                st.push(0); //start a new score block
+            }
+            
+            
+            else{
+                
+                int innerscore = st.top(); st.pop();
+                
+                int outerscore = st.top(); st.pop();
+                
+                int newscore = max(2*innerscore,1);
+                
+                st.push(outerscore+newscore);
+            }
+            
+            
+        }
+        return st.top();
+        
+         
+}

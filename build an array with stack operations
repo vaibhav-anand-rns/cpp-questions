@@ -1,0 +1,19 @@
+vector<string> buildArray(vector<int>& target, int n) {
+    vector<string> result;
+    int curr = 1;  // Start from number 1
+    int i = 0;     // Index for target array
+
+    while (i < target.size()) {
+        result.push_back("Push");
+
+        if (target[i] == curr) {
+            i++;  // Number matches target → keep it
+        } else {
+            result.push_back("Pop");  // Number not in target → remove it
+        }
+
+        curr++;  // Move to next number
+    }
+
+    return result;
+}

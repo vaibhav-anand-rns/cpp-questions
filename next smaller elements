@@ -1,0 +1,22 @@
+class solution{
+    public:
+           vector<int> nextSmallerElements(vector<int>& arr){
+               
+               vector<int> result(n);
+               int n = arr.size();
+               stack<int> s;
+               
+               for(int i = n-1; i>=0; i--){
+                   
+                   while(!s.empty() && s.top() >= arr[i]){
+                       
+                       s.pop();
+                   }
+                   
+                   result[i] = s.empty() ? -1: s.top();
+                   s.push(arr[i])
+               }
+               
+           }
+           return result;
+}

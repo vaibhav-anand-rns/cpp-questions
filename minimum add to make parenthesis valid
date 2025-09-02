@@ -1,0 +1,19 @@
+int minAddToMakeValid(string s) {
+    int open = 0; // number of unmatched '('
+    int add = 0;  // number of insertions needed
+
+    for (char c : s) {
+        if (c == '(') {
+            open++; // need a closing ')'
+        } else { // c == ')'
+            if (open > 0) {
+                open--; // match with an open '('
+            } else {
+                add++; // no open to match with — need to insert '('
+            }
+        }
+    }
+
+    // Total insertions = unmatched '(' + unmatched ')'
+    return open + add;
+}

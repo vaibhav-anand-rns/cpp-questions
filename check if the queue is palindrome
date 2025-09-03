@@ -1,0 +1,23 @@
+bool isPalindrome(queue<int> q){
+    
+    stack<int> s;
+    int size = q.size();
+    
+    queue<int>temp;
+    while(!temp.empty()){
+        
+        s.push(temp.front);
+        temp.pop();
+    }
+    
+    while(!q.empty()){
+        
+        if(q.front() != s.top()){
+            
+            return false;
+        }
+        q.pop();
+        s.pop();
+    }
+    return true;
+}

@@ -1,0 +1,63 @@
+class circularqueue{
+    
+    private:
+    
+            int*arr;
+            int front, rear,size,capacity;
+            
+            
+    public:
+           
+           CircularQueue(int cap) {
+           capacity = cap;
+           arr = new int[capacity];
+           front = -1;
+           rear = -1;
+           size = 0;
+           
+           }
+           
+           void enqueue(int value){
+               
+               if(isfull()){
+                   
+                   cout << queue is full << endl;
+               }
+               
+               //first insertion
+               if(isEmpty()){
+                   
+                   front=rear=0;
+                   
+               }
+               else{
+                   
+                   rear = (rear+1)%capacity ;
+               }
+               arr[rear] = value;
+               size++ ;
+           }
+           
+           int dequeue(){
+               
+               if(isEmpty()){
+                   
+                   cout << queue is empty << endll
+               }
+               
+               if(front == rear){
+                   front = rear = -1;
+               }
+               else{
+                   
+                   front = (front+1) % capacity;
+               }
+               size -- ;
+               return val;
+               
+               
+               
+               
+           }
+    
+}

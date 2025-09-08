@@ -1,0 +1,47 @@
+void reverselinkedlist(Node*head){
+    
+    if(head == null || head->next == null){
+        return head;
+    }
+    
+    Node*newHead = reverselinkedlist(head->next);
+    Node*front = head->next;
+    head->next = null;
+    front->next = head;
+    return newHead;
+}
+
+bool isPalindrome(Node*head){
+    
+    if(head == null || head->next == null){
+        
+        return true;
+    }
+    
+    Node*slow = head;
+    Node*fast = head;
+    while(fast->next != null && fast->next->next != null){
+        
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+     Node*newHead = reverselinkedlist(slow->next);
+     node*first = head;
+     node*second = newhead;
+     while(second != null){
+         
+         if(first->data != second->data){
+             
+             return false;
+             reverselinkedlist(new head);
+             
+         }
+         first = first->next;
+         second = second->next;
+         
+     }
+     reverselinkedlist(new head);
+     return true;
+     
+    
+}

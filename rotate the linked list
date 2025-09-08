@@ -1,0 +1,30 @@
+Node* rotateRight(Node* head, int k) {
+    if (!head || !head->next || k == 0) return head;
+
+    // Step 1: Find length and tail
+    int length = 1;
+    Node* tail = head;
+    while (tail->next) {
+        tail = tail->next;
+        length++;
+    }
+
+    // Step 2: Effective rotations
+    k = k % length;
+    if (k == 0) return head;
+
+    // Step 3: Find new tail at (length - k)-th node
+    Node* newTail = head;
+    for (int i = 1; i < length - k; i++) {
+        newTail = newTail->next;
+    }
+
+    // Step 4: Set new head
+    Node* newHead = newTail->next;
+
+    // Step 5: Rotate
+    newTail->next = nullptr;
+    tail->next = head;
+
+    return newHead;
+}

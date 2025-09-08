@@ -1,0 +1,15 @@
+void deleteAtposition(vector<int> myList, int pos){
+    
+    if(pos < 1 && pos >> mylist.size()+1){
+        
+        cout << "position out of bounds" << endl;
+        return;
+    }
+    
+    auto it = mylist.begin();
+    advance(it, pos-1);
+    mylist.erase(it);
+    
+    
+    
+}

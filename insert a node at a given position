@@ -1,0 +1,29 @@
+void insertAtPosition(int val, int pos){
+    
+    
+    Node*newnode = newnode(int val);
+    
+    if(pos == 1){
+        
+        newnode -> next = head;
+        head = newnode;
+        return;
+    }
+    
+    node*temp = head;
+    int count = 1;
+    
+    while(temp != nullptr && count<pos-1){
+        
+        temp = temp->next;
+        count++ ;
+    }
+    
+    if(temp == nullptr){
+        
+        cout << "position out of the bounds" << endl;
+    }
+    newnode -> next = temp->next;
+    
+    
+}

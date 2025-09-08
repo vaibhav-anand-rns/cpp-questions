@@ -1,0 +1,26 @@
+int findloopLength(Node*head){
+    
+    Node*slow = head;
+    Node*fast = head;
+    
+    while(fast && fast->next){
+        
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    if(slow == fast){
+        
+        //cycle detect
+        
+        int length = 1;
+        Node*temp = slow->next;
+        
+        while(temp != slow){
+            
+            temp = temp->next;
+            length++ ;
+        }
+    }
+    return length ;
+    
+}

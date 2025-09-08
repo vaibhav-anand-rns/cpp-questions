@@ -1,29 +1,15 @@
-void insertAtPosition(int val, int pos){
-    
-    
-    Node*newnode = newnode(int val);
-    
-    if(pos == 1){
-        
-        newnode -> next = head;
-        head = newnode;
+#include <iostream>
+#include <list>
+using namespace std;
+
+void insertAtPosition(list<int>& myList, int val, int pos) {
+    if (pos < 1 || pos > myList.size() + 1) {
+        cout << "Position out of bounds." << endl;
         return;
     }
-    
-    node*temp = head;
-    int count = 1;
-    
-    while(temp != nullptr && count<pos-1){
-        
-        temp = temp->next;
-        count++ ;
-    }
-    
-    if(temp == nullptr){
-        
-        cout << "position out of the bounds" << endl;
-    }
-    newnode -> next = temp->next;
-    
-    
+
+    auto it = myList.begin();
+    advance(it, pos - 1);  // Move iterator to the (pos-1)th place
+
+    myList.insert(it, val);
 }

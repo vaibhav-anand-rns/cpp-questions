@@ -1,0 +1,35 @@
+void swapKth(Node* head, int k){
+    
+    if(!head){
+        return;
+    }
+    
+    int n = 0;
+    node*temp = head;
+    while(temp){
+        
+        n++ ;
+        temp = temp->next;
+    }
+    
+    if(k>n){
+        return;
+    }
+    
+    if(2*k-1 == n){
+        
+        return;
+    }
+    node*first = head;
+    for(int i = 1; i<k; i++){
+        
+        first = first->next;
+    }
+    node*second = head;
+    for(int i = 1; i<n-k+1; i++){
+        
+        second = second->next;
+    }
+    
+    swap(first->data,second->data);
+}

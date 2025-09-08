@@ -1,0 +1,7 @@
+void printReverse(Node* head) {
+    if (head == nullptr)
+        return;
+
+    printReverse(head->next);   // Go to next node
+    cout << head->data << " ";  // Print during backtracking
+}

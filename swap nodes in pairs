@@ -1,0 +1,41 @@
+class solution{
+    public:
+          
+          ListNode*swapPairs(ListNode*head){
+              
+              if(head == null || head -> next == null){
+                  return false;
+              }
+              
+              ListNode*first = head;
+              ListNode*second = head->next;
+              ListNode*prev = null;
+              
+              while(first != null && second != null){
+                  
+                  ListNode*third = sec->next;
+                  sec->next = first;
+                  first->next = third;
+              }
+              
+              if(prev != null){
+                  prev->next = second;
+              }
+              else{
+                  
+                  head = second ;
+              }
+              // update
+              
+              prev = first;
+              first = third;
+              while(third != null){
+                  
+                  second -> next = third;
+              }
+              else{
+                  second = null ;
+              }
+          }
+    
+}

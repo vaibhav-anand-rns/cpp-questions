@@ -1,0 +1,15 @@
+void deleteAlternate(Node* head){
+    
+    if(!head){
+        return;
+    }
+    
+    node*curr = head;
+    while(curr && curr->next){
+        
+        node*temp = curr->next;
+        curr->next = temp->next;
+        delete temp;
+        curr = curr->next;
+    }
+}

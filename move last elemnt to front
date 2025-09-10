@@ -1,0 +1,26 @@
+struct ListNode {
+    int val;
+    ListNode* next;
+    ListNode(int x) : val(x), next(nullptr) {}
+};
+
+ListNode* moveLastToFront(ListNode* head) {
+    if (!head || !head->next)
+        return head;  // empty or single node list
+
+    ListNode* secondLast = nullptr;
+    ListNode* last = head;
+
+    // Traverse to find the last and second-last nodes
+    while (last->next) {
+        secondLast = last;
+        last = last->next;
+    }
+
+    // Detach last and move it to front
+    secondLast->next = nullptr;
+    last->next = head;
+    head = last;
+
+    return head;
+}

@@ -1,0 +1,40 @@
+#include <iostream>
+
+struct Node {
+    int data;
+    Node* next;
+    Node* child;
+
+    Node(int val) : data(val), next(nullptr), child(nullptr) {}
+};
+
+// Recursive function to flatten the list
+Node* flattenList(Node* head) {
+    if (!head) return nullptr;
+
+    Node* curr = head;
+
+    while (curr) {
+        // If no child, go to next node
+        if (!curr->child) {
+            curr = curr->next;
+        } else {
+            Node* child = flattenList(curr->child); // flatten child list
+            Node* next = curr->next;
+
+            curr->next = child;       // link current node to child
+            curr->child = nullptr;    // remove child pointer
+
+            // Find tail of flattened child list
+            Node* temp = curr->next;
+            while (temp->next) {
+                temp = temp->next;
+            }
+
+            temp->next = next; // connect tail to original next node
+            curr = next;
+        }
+    }
+
+    return head;
+}

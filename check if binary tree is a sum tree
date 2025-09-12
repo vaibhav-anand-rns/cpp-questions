@@ -1,0 +1,28 @@
+class solution{
+    
+    public:
+          
+          int checkSumTree(TreeNode* node){
+              
+              if(!node){
+                  return 0;
+              }
+              if(!node->left && !node->right){
+                  
+                  return node->val; //leaf node
+              }
+              
+              int leftsum = checkSumTree(node->left);
+              int rightsum = checkSumTree(node->right);
+              
+              if(leftsum == -1 || rightsum == -1){
+                  
+                  return -1 ;
+              }
+              if(node->val != int leftsum + int rightsum){
+                  return -1 ;
+              }
+              return node->val+leftsum+rightsum ;
+              
+          }
+}

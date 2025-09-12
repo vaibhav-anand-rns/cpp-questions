@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+
+struct TreeNode {
+    int val;
+    TreeNode* left;
+    TreeNode* right;
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+};
+
+void rightViewUtil(TreeNode* node, int level, int& maxLevel) {
+    if (!node) return;
+
+    // First node of this level
+    if (level > maxLevel) {
+        cout << node->val << " ";
+        maxLevel = level;
+    }
+
+    // Traverse right first
+    rightViewUtil(node->right, level + 1, maxLevel);
+    rightViewUtil(node->left, level + 1, maxLevel);
+}
+
+void rightView(TreeNode* root) {
+    int maxLevel = 0;
+    rightViewUtil(root, 1, maxLevel);
+}

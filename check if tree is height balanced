@@ -1,0 +1,23 @@
+//A binary tree is height-balanced if, for every node,
+//the difference in height between its left and right subtree is at most 1.
+
+int checkBalance(TreeNode* node){
+    
+    if(!node){
+        return ;
+    }
+    
+    int leftheight = checkBalance(node->left);
+    if(leftheight == -1){
+        return -1 ;
+    }
+    int rightheight = checkBalance(node->right);
+    if(rightheight == -1){
+        return -1;
+    }
+    if(abs(leftheight - rightheight > 1)){
+        
+        return -1 ;
+    }
+    return max(leftheight,rightheight) + 1;
+}

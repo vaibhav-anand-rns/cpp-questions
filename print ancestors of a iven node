@@ -1,0 +1,19 @@
+// use postorder traversal
+
+bool printAncestors(TreeNode* root, int target){
+    
+    if(root == nullptr){
+        return false;
+    }
+    if(root->val == target){
+        
+        return true;
+    }
+   // check in the left subtree or right subtree
+    if(printAncestors(root->left == target) || printAncestors(root->right == target)){
+        
+        cout << root->val << "";
+        return true ;
+    }
+}    
+    

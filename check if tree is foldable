@@ -1,0 +1,24 @@
+// A binary tree is foldable if its left and right subtrees are mirror images of each other structurally (we don’t care about node values, only structure).
+
+bool isMirrorStructure(TreeNode* a, TreeNode* b) {
+    
+    if(!a || !b){
+        return true ;
+    }
+    if(!a || b){
+        return false ;
+        
+    }
+    return isMirrorStructure(a->left,b->right) && (a->right,b->left);
+    
+    // Check if the tree is foldable
+    
+    bool isfoldable(TreeNode*root){
+        
+        if(!root){
+            return true ;
+        }
+        return isMirrorStructure(root->left,root->right);
+    }
+    
+}

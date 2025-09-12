@@ -1,0 +1,52 @@
+bool isLeaf(TreeNode* node){
+    
+    return node && !node->left && !node->right;
+}
+
+void addleftboundary(TreeNode*node,vector<int> &res){
+    
+    TreeNode*curr = node->left;
+    while(curr){
+        
+        if(!isleaf(curr)){
+            
+            res.push_back(curr->val);
+            
+            
+        }
+        if(curr->left){
+            
+            curr = curr->left;
+        }
+        else{
+            curr = curr->right;
+        }
+    }
+}
+void addrightboundary(Treenode*node,vector<int> &res){
+    
+    TreeNode*curr = node->right;
+    while(curr){
+        if(!isleaf(curr)){
+            
+            temp.push_back(curr->val);
+        }
+        if(curr->right){
+            curr = curr->right;
+        }
+        else{
+            curr = curr->right;
+        }
+    }
+}
+// Print all leaf nodes (left to right)
+void addLeaves(TreeNode* node, vector<int>& res) {
+    if (!node) return;
+    if (isLeaf(node)) {
+        res.push_back(node->val);
+        return;
+    }
+    addLeaves(node->left, res);
+    addLeaves(node->right, res);
+}
+

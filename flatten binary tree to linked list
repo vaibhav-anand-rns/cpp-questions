@@ -1,0 +1,20 @@
+class solution{
+    
+    public:
+          
+          Treenode*nextright = null;
+          
+          void flatten(Treenode*root){
+              
+              if(root == null){
+                  
+                  return ;
+              }
+              flatten(root->right);
+              flatten(root->left);
+              
+              root->left = null;
+              root->right = nextright;
+              nextright = root;
+          }
+}

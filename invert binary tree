@@ -1,0 +1,19 @@
+class solution{
+    
+    public:
+    
+          TreeNode* invertTree(TreeNode* root){
+              
+              if(!root){
+                  
+                  return nullptr;
+              }
+              
+              TreeNode*leftsub = invertTree(root->left);
+              TreeNode*rightsub = invertTree(root->right);
+              root->left = rightsub;
+              root->right = leftsub;
+              
+              return root;
+          }
+}

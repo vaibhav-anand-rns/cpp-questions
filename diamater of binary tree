@@ -1,0 +1,19 @@
+int diameterHelper(TreeNode* root, int& diameter){
+    
+    if(!root){
+        
+        return 0 ;
+        
+    }
+    int leftheight = diameterHelper(root->left,diameter);
+    int rightheight = diameterHelper(root->righ,diameter);
+    
+    diameter = max(diameter,leftheight+rightheight+1);
+    return max(leftheight,rightheight)+1 ;
+    int diameterOfBinaryTree(TreeNode* root){
+        int diamter = 0;
+        diameterHelper(root,diameter);
+        return diameter;
+    }
+    
+}

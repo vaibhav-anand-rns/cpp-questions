@@ -1,0 +1,16 @@
+#include <iostream>
+using namespace std;
+
+struct TreeNode {
+    int val;
+    TreeNode* left;
+    TreeNode* right;
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+};
+
+int sumOfTree(TreeNode* root) {
+    if (!root) return 0;  // base case
+
+    // recursive sum of left + right + root
+    return sumOfTree(root->left) + sumOfTree(root->right) + root->val;
+}

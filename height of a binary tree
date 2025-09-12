@@ -1,0 +1,11 @@
+//If you're counting edges, it's called height.
+
+int height(TreeNode* root) {
+    if (root == nullptr)
+        return 0;
+
+    int leftHeight = height(root->left);
+    int rightHeight = height(root->right);
+
+    return 1 + std::max(leftHeight, rightHeight);
+}

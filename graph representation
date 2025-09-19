@@ -1,0 +1,25 @@
+class graph{
+    
+    int v; //no of vertices
+    vector<vector<int>> adj; //adjacency list
+}
+
+// add edge to the undirected graph
+
+void addEdge(int u, int v){
+    
+    adj[u].push_back(v);
+    adj[v].push_back(u);
+}
+
+void printgraph(){
+    
+    cout <<"adjacency list of vertex"<< i << ":" ;
+    for(auto node:adj[i]){
+        
+        cout << node << " ";
+    }
+    cout << "\n";
+    
+    
+}

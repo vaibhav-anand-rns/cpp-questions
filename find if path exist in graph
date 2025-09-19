@@ -1,0 +1,43 @@
+class solution{
+    
+    public:
+          
+          bool dfs(int node, int end, vector<vector<int>>& adj, vector<bool>& visited){
+              
+              if(node == end){
+                  
+                  return true;
+              }
+              visted[node] = true;
+              
+              
+              for(int neighbour:adj[node]){
+                  
+                  if(!visited[neighbour]){
+                      
+                      if(dfs(neigbour,visted,end,adj)){
+                          
+                          return true;
+                      }
+                      
+                      
+                  }
+              }
+              
+              return false;
+          }
+          
+          bool validPath(int n, vector<vector<int>>& edges, int start, int end){
+              
+              //build adajacency list
+              vector<vector<int>>adj(n);
+              for(auto&edge : edges){
+                  
+                  adj[edge[0]].push_back(edge[1]);
+                  adj[edge[1]].push_back(edge[0]);
+              }
+              
+              vector<n> vsisted(bool,false);
+              retrun dfs(start,end,adj,visited);
+          }
+}

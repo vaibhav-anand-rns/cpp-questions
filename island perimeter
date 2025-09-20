@@ -1,0 +1,29 @@
+class solution{
+    
+    public:
+          
+          int islandPerimeter(vector<vector<int>>& grid){
+              
+              int rows = grid.size();
+              int cols = grid[0].size();
+              int perimeter = 0;
+              for(int i = rows; i<rows; i++){
+                  for(int j = cols; j<cols; j++){
+                      if(grid[i][j] == 1){
+                          perimeter += 4;
+                          
+                      }
+                      //check top neighbor
+                      if(i>0 && grid[i-1][j] == 1){
+                          perimeter -= 2;
+                      }
+                      //check left neighbor
+                      if(j>0 && grid[i][j] == 1){
+                          perimeter -= 2;
+                      }
+                  }
+              }
+              return perimeter;
+              
+          }
+}

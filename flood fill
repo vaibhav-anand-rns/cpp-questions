@@ -1,0 +1,35 @@
+class solution{
+    
+    public:
+          
+          void dfs(vector<vector<int>>& image, int sr, int sc, int color, int originalColor){
+              
+              int rows = image.size();
+              int cols = image[0].size();
+              
+              //boundary or color mismatch
+              
+              if(sr<0 || sr>=rows || sc<0 || sc>=cols || image[sr][sc] != originalcolor){
+                  
+                  
+                  return;
+                  
+                  
+              }
+              //fill the color
+              image[sr][sc] = color;
+              dfs(image,sr-1,color,originalcolor)//up
+              dfs(image,sr+1,color,originalcolor)//down
+              dfs(image,sc-1,color,originalcolor)//left
+              dfs(image,sc+1,color,originalcolor)//right
+          }
+           vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color){
+               
+               int originalcolor = image[src][src];
+               if(originalcolor = color){
+                   return image;
+               }
+               dfs(image,sr,sc,color,originalcolor);
+               return image;
+           }
+}

@@ -1,0 +1,45 @@
+class solution{
+    
+    public:
+          
+          vector<int> topologicalSort(int n, vector<vector<int>>& edges){
+              
+              vector<vector<int>> adj(n);
+              vector<int> indegree(n,0);
+              
+              //build the graph
+              for(auto &edge : edges){
+                  
+                  int u = edge[0];
+                  int v = edge[1];
+                  adj[u].push_back(v);
+                  indegree[v]++ ;
+                  
+              }
+              // Queue for nodes with 0 in-degree
+              queue<int> q;
+              for(int i = 0; i<n; i++){
+                  
+                  if(indegree[i] == 0){
+                      
+                      q.push(i);
+                  }
+              }
+              vector<int> toporder;
+              while(!q.empty()){
+                  
+                  int node = q.front();
+                  q.pop();
+                  toporder.push_back(node);
+              }
+               // Decrease in-degree of all neighbors
+               for(int neighbor : adj[node]){
+                   
+                   indegree[neighbor]-- ;
+                   if(indegree[neighbor] == 0){
+                       
+                       q.push(neighbor);
+                   }
+               }
+          }
+}

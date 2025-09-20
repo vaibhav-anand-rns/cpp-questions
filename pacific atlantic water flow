@@ -1,0 +1,42 @@
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    int m, n;
+    vector<vector<int>> directions = {{0,1}, {1,0}, {0,-1}, {-1,0}};
+
+    void dfs(vector<vector<int>>& heights, vector<vector<bool>>& visited, int x, int y) {
+        visited[x][y] = true;
+
+        for (auto& dir : directions) {
+            int nx = x + dir[0], ny = y + dir[1];
+
+            // Check bounds and increasing height
+            if (nx >= 0 && ny >= 0 && nx < m && ny < n &&
+                !visited[nx][ny] &&
+                heights[nx][ny] >= heights[x][y]) {
+                dfs(heights, visited, nx, ny);
+            }
+        }
+    }
+
+    vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
+        m = heights.size();
+        if (m == 0) return {};
+        n = heights[0].size();
+
+        vector<vector<bool>> pacific(m, vector<bool>(n, false));
+        vector<vector<bool>> atlantic(m, vector<bool>(n, false));
+
+        // DFS from Pacific border (top and left)
+        for (int i = 0; i < m; ++i) dfs(heights, pacific, i, 0);
+        for (int j = 0; j < n; ++j) dfs(heights, pacific, 0, j);
+
+        // DFS from Atlantic border (bottom and right)
+        for (int i = 0; i < m; ++i) dfs(heights, atlantic, i, n - 1);
+        for (int j = 0; j < n; ++j) dfs(heights, atlantic, m - 1, j);
+
+        // Find intersection
+        vector<vector<int>> result;
+        for (int i = 0;

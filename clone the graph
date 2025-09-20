@@ -1,0 +1,30 @@
+class solution{
+    
+    public:
+           
+           //use hashmap to save visted node and their copies
+           
+           unordered_map<Node* , Node*>visited;
+           
+           Node*cloneGraph(Node*node){
+               
+               if(!node){
+                   return nullptr;
+               }
+               //if node was already cloned return clone
+               
+               if(visited.find(node) != visited.end()){
+                   
+                   return visited[node];
+               }
+               //clone the node
+               Node*clone = new Node(node->val);
+               visited[node] = clone;
+               
+               //clone all the neighbours
+               for(auto it : adj[node]){
+                   
+                   clone->it.push_back(cloneGraph(it));
+               }
+               return clone;
+           }

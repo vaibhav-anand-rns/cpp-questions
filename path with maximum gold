@@ -1,0 +1,45 @@
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+class Solution {
+public:
+    int m, n;
+    vector<vector<int>> directions = {{0,1}, {1,0}, {0,-1}, {-1,0}};
+
+    int dfs(vector<vector<int>>& grid, int x, int y) {
+        // Base case: out of bounds or no gold
+        if (x < 0 || y < 0 || x >= m || y >= n || grid[x][y] == 0)
+            return 0;
+
+        int goldHere = grid[x][y];
+        grid[x][y] = 0; // Mark as visited
+
+        int maxGold = 0;
+        for (auto& dir : directions) {
+            int nx = x + dir[0];
+            int ny = y + dir[1];
+            maxGold = max(maxGold, dfs(grid, nx, ny));
+        }
+
+        grid[x][y] = goldHere; // Backtrack
+
+        return goldHere + maxGold;
+    }
+
+    int getMaximumGold(vector<vector<int>>& grid) {
+        m = grid.size();
+        n = grid[0].size();
+        int maxGoldCollected = 0;
+
+        for (int i = 0; i < m; ++i) {
+            for (int j = 0; j < n; ++j) {
+                if (grid[i][j] > 0) {
+                    maxGoldCollected = max(maxGoldCollected, dfs(grid, i, j));
+                }
+            }
+        }
+
+        return maxGoldCollected;
+    }
+};

@@ -1,0 +1,50 @@
+class solution{
+    public:
+          
+          bool dfs(int node, int parent, vector<vector<int>>& adjList, vector<bool>& visited) {
+        visited[node] = true;
+        for(int neigbor : adjList[node]){
+            
+            if(!visited neighbor){
+                if(!dfs(neighbor,node,visited,adjList)){
+                    
+                    return false;
+                }
+                else if(neighbor != parent){
+                    
+                    //cycle detect
+                    return false;
+                }
+            }
+            return true;
+        }
+        
+        bool validTree(int n, vector<vector<int>>& edges){
+            if(edges.size() != n-1){
+                return false;
+            }
+            
+            //build adajacency list
+            
+            vector<vector<<int>> adjList(n);
+            for(auto edge:edges){
+                
+                adjList[u].push_back[v];
+                adjList[v].push_vack[u];
+            }
+            vector<bool> vsisted(n,false);
+            //check for cycles
+            if(!dfs(0,-1,adjList,visited)){
+                
+                return false ;
+            }
+            
+        }
+        
+        
+        
+
+}
+
+
+}

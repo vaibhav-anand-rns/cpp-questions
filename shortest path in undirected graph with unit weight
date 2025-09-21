@@ -1,0 +1,31 @@
+class solution{
+    
+    public:
+          
+          void addEdge(int u, int v){
+              adj[u].push_back(v);
+              adj[v].push_back(u);
+          }
+          void shortestpath(int src){
+              
+              vector<int> dist(V,INT_MAX);
+              queue<int>q;
+              dist[src] = 0;
+              q.push(src);
+              
+              while(!q.empty()){
+                  
+                  int u = q.front();
+                  q.pop();
+                  
+                  for(int neighbor : adj[u]){
+                      
+                      if(dist[neighbor] == INT_MAX){
+                          dist[neighbor] = dist[u] + 1;
+                          q.push(neighbor);
+                      }
+                      
+                  }
+              }
+          }
+}

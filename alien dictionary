@@ -1,0 +1,27 @@
+class solution{
+    public:
+          
+          string findOrder(string dict[], int n, int k){
+              
+              vector<int>adj[k];
+              for(int i = 0; i<n-1; i++){
+                  
+                  string S1 = dict[i];
+                  string S2 = dict[i+1];
+                  int len = min(s1.size(),s2.size());
+                  for(int ptr = 0; ptr<len; ptr++){
+                      
+                      if(s1[ptr] != s2[ptr]){
+                          
+                          adj[s1[ptr]].push_back(s2[ptr]);
+                          break;
+                      }
+                      
+                      
+                  }
+                  
+                  
+              }
+          }
+          //copy the topological function
+}

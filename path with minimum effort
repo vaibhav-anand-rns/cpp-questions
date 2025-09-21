@@ -1,0 +1,66 @@
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <climits>
+using namespace std;
+
+struct Cell {
+    int x, y;
+    int effort; // effort = max difference so far
+};
+
+int minimumEffortPath(vector<vector<int>>& heights) {
+    int n = heights.size();
+    int m = heights[0].size();
+
+    vector<vector<int>> dist(n, vector<int>(m, INT_MAX));
+    dist[0][0] = 0;
+
+    // Min-heap priority queue: (effort, (x, y))
+    priority_queue<
+        pair<int, pair<int,int>>, 
+        vector<pair<int, pair<int,int>>>, 
+        greater<pair<int, pair<int,int>>>
+    > pq;
+
+    pq.push({0, {0, 0}});
+
+    int dx[] = {-1, 0, 1, 0};
+    int dy[] = {0, 1, 0, -1};
+
+    while (!pq.empty()) {
+        auto [effort, pos] = pq.top();
+        pq.pop();
+
+        int x = pos.first;
+        int y = pos.second;
+
+        if (x == n-1 && y == m-1) return effort;
+
+        for (int dir = 0; dir < 4; dir++) {
+            int nx = x + dx[dir];
+            int ny = y + dy[dir];
+
+            if (nx >= 0 && nx < n && ny >= 0 && ny < m) {
+                int currEffort = max(effort, abs(heights[x][y] - heights[nx][ny]));
+                if (currEffort < dist[nx][ny]) {
+                    dist[nx][ny] = currEffort;
+                    pq.push({currEffort, {nx, ny}});
+                }
+            }
+        }
+    }
+
+    return 0; // Just in case, but usually won't reach here.
+}
+
+int main() {
+    vector<vector<int>> heights = {
+        {1, 2, 2},
+        {3, 8, 2},
+        {5, 3, 5}
+    };
+
+    cout << "Minimum Effort: " << minimumEffortPath(heights) << endl;
+    return 0;
+}

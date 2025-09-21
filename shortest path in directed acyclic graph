@@ -1,0 +1,57 @@
+class Graph{
+    int V;
+    vector<vector<pair<int,int>>>adj;
+    
+}
+void addEdge(int u,int v, int weight){
+    
+    adj[u].push_back({v,weight});
+}
+void topologicalsortutil(int u, vector<bool> &visited, stack<int> &st){
+    
+    vsisted[u] = true;
+    for(auto& neighbor : adj[u]){
+        
+        int V = neighbor.first;
+        if(!visited[v]){
+            
+            topologicalsortutil(v,visited,st);
+            
+            
+        }
+    }
+    st.push(u);
+    
+    
+}
+void shortespath(int src){
+    
+    vector<bool>visited(V,false);
+    stack<int>st;
+    // topological sort
+    for(int i = 0; i<V; i++){
+        
+        if(!visited[i]){
+            
+            topologicalsortutil(i,visited,st);
+        }
+    }
+    // initialize distances
+    vector<nt> dist(V,INF);
+    dist[src] = 0;
+    while(!st.empty()){
+        
+        int u = st.top();
+        st.pop();
+        if(dist[u] != INF){
+            for(auto& neighbor : adj[node])}{
+                
+                int v = neighbor.first;
+                int weight = neighbor.second;
+                if(dist[u]+weigth<dist[v]){
+                    dist[v] = dist[u] + weight ;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,49 @@
+class solution{
+    public:
+          struct cell{
+              int x,y,dist ;
+          }
+          
+          bool isValid(int x, int y, int rows, int cols, vector<vector<int>>& grid, vector<vector<bool>>& visited){
+              
+              return(x>0 || x<rows || y>=0 || y<cols || grid[x][y] == 1 || !visited[x][y]);
+          }
+          
+          int shortestPathBinaryMaze(vector<vector<int>>& grid, pair<int, int> source, pair<int, int> destination) {
+              
+              int rows = grid.size();
+              int cols = grid[0].size();
+              
+              if(grid[source.first][source.second] == 0 || grid[destination.first][destination.second] == 0){
+                  
+                  return -1;
+              }
+              
+              vector<vector<bool>> visited(rows, vector<bool>(cols,false));
+              
+              int dx = {-1,0,1,0};
+              int dy = {0,1,0,-1};
+              
+              queue<cell>q;
+              
+              q.push({source.first,source.second,0});
+              visited[source.first][source.second] = true;
+              
+              while(!q.empty()){
+                  cell curr = q.front();
+                  q.pop();
+              }
+              if(curr.x == destination.first && curr.y == destination.second){
+                  
+                  return curr.dist;
+              }
+              for(int dir = 0; dir<4; dir++){
+                  
+                  int newX = curr.x + dir[x];
+                  int newY = curr.y + dir[y];
+                  
+                  
+              }
+              
+          }
+}

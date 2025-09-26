@@ -1,0 +1,33 @@
+class solution{
+    
+    public:
+          
+          int makeConnected(int n, vector<vector<int>>& connections){
+              
+              if(connection.size() < n-1){
+                  
+                  return -1;
+              }
+              
+              Disjointset ds(n);
+              int extraedges = 0;
+              
+              for(auto& conn : connections){
+                  
+                  int u = conn[0],v= conn[1];
+                  if(!ds.unionsets(u,v)){
+                      extraedges++ ; // redudnat edges
+                  }
+              }
+              
+              int components = ds.components();
+              int required edges = components-1;
+              if(exta edges >= required edges){
+                  
+                  return required edges;
+              }
+              else{
+                  return -1;
+              }
+          }
+}

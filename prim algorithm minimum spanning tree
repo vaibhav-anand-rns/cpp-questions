@@ -1,0 +1,37 @@
+class solution{
+    public:
+          
+          typedef<pair<int,int>> pii; //(weight,node)
+          int primMST(int n, vector<vector<pii>>& adj){
+              
+              vector<bool>visited(n,false);
+              priority_queue<pii,vector<pii>,greater <pii> minheap;
+               int mstweight = 0;
+               minHeap.push({0,0});
+               
+               while(!minHeap.empty()){
+                   
+                   auto[weight, u] = minHeap.top();
+                   minHeap.pop();
+                   
+                   if(visited u){
+                       continue;
+                       
+                   }
+                   else{
+                       visited[u] = true;
+                       mstweight+=weight;
+                   }
+                   
+                   for(auto&[v,w] : adj[u]){
+                       if(!visited[v]){
+                           
+                           minHeap.push({w,v});
+                       }
+                   }
+                       
+               }
+          }
+          return mstweight ;
+          
+}

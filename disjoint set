@@ -1,0 +1,43 @@
+class solution{
+    
+    public:
+          
+          vector<int>parent,rank;
+          Disjointset(int n){
+              
+              parent.resize(n);
+              rank.resize(n,0);
+              for(int i = 0; i<n; i++){
+                  
+                  parent[i] = i; //each node is own parent
+              }
+          
+              //path compression
+              int find(x){
+                  if(parent[x] != x){
+                      
+                      parent[x] = find(parent[x]);
+                  }
+                  return parent[x];
+              }
+              //union by rank
+              
+              void unionsets(int x, int y){
+                  int root(x) = find(x);
+                  int root(y) = find(y);
+                  
+                  if(root(x) == root(y)){
+                      return;
+                  }
+                  if(rank[rootx]<rank[rooty]){
+                      
+                      parent[rootx] = rooty;
+                  }
+                  else{
+                      parent[rooty] = rootx;
+                      rank[rootx]++ ;
+                  }
+              }
+              
+          }
+}

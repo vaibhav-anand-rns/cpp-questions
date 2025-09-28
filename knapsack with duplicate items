@@ -1,0 +1,23 @@
+class solution{
+    public:
+          
+          int unboundedKnapsack(int W, const vector<int>& weights, const vector<int>& values, vector<int>& dp) {
+              
+              if(w == 0){
+                  return 0;
+              }
+              if(dp[w] != -1){
+                  return dp[w];
+              }
+              int max = 0;
+              for(int  i = 0; i<weights.size(); i++){
+                  if(weights[i] <= W){
+                      // Choose item i and recurse on remaining capacity (W - weights[i])
+                      int val = values[i] + unboundedKnapsack(W-weights[i],weights,values,dp); 
+                  }
+                  maxvalue = max(maxValue,val);
+              }
+              
+              return dp[W] = maxValue;
+          }
+}

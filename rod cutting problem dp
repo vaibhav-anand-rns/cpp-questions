@@ -1,0 +1,19 @@
+class solution{
+    public:
+          
+          int rodCutting(int n, vector<int>& price, vector<int>& dp){
+              
+              if(n == 0){
+                  return 0 ;
+              }
+              if(dp[n] != -1){
+                  return dp[n];
+              }
+              int maxval = 0;
+              for(int i = 1; i<=n;i++){
+                  
+                  maxval = max(maxval,price[i-1]+rodCutting(n-1,price,dp))
+              }
+              return dp[n] = maxval;
+          }
+}

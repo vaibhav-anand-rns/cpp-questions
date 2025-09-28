@@ -1,0 +1,26 @@
+class solution{
+    
+    public:
+          
+          int minCoins(int amount, vector<int>& coins, vector<int>& dp){
+              
+              if(amount == 0){
+                  return 0;
+              }
+              if(dp[amount] != -1){
+                  return dp[amount];
+              }
+              int ans = INT_MAX;
+              for(int coin : coins){
+                  
+                  if(coin <= amount){
+                      
+                      int res = mincoins(amount-coin,coins,dp);
+                      if(res != INT_MAX){
+                          ans = min(ans,res+1);
+                      }
+                  }
+              }
+              return dp[amount] = ans;
+          }
+}

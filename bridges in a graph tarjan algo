@@ -1,0 +1,45 @@
+class solution{
+    public:
+          
+          vector<int>adj[MAXN];
+          vector<pair<int,int> bridges;
+          bool visited[MAXN];
+          int tin[MAXN], low[MAXN];
+          int timer = 0;
+          
+          void DFS(int u, parent){
+              visited[u] = true;
+              tin[u] = low[u] = timer++ ;
+              for(int v : adj[u]){
+                  
+                  if(v == parent){
+                      continue;
+                  }
+                  if(visited[v]){
+                      //back edge
+                      low[u] = min(low[u],tin[v]);
+                  }
+                  else{
+                      
+                      dfs(v,u);
+                      low[u]=min(low[u],low[v]);
+                  }
+                  //check for bridge
+                  
+                  if(low[v] > tin[u]){
+                      bridges.push_back({u,v});
+                  }
+              }
+          }
+          void findbridges(int n){
+              
+              timer = 0;
+              bridges.clear();
+              fill(visited,visited+n,false);
+              for(int i = 0; i<n; i++){
+                  if(!visited[i]){
+                      dfs(i,-1);
+                  }
+              }
+          }
+}

@@ -1,0 +1,17 @@
+class solution{
+    public:
+          
+          int countWays(int n, vector<int>& dp){
+              
+              if(n == 0 || n == 1){
+                  return 1;
+              }
+              if(dp[n] != -1){
+                  return dp[n];
+              }
+              
+              int vertical = (n-1,dp);
+              int horizontal = (n-2,dp);
+              return dp[n] = (vertical+horizontal) % mod;
+          }
+}

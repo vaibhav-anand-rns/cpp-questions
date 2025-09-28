@@ -1,0 +1,13 @@
+class solution{
+    public:
+          long long derangement(int n, vector<long long>& dp){
+              
+              if(n == 0 || n == 1){
+                  return 1;
+              }
+              if(dp[n] != -1){
+                  return dp[n];
+              }
+              return dp[n] = ((n-1) *(derangement(n-1,dp)) + derangement(n-2,dp)) % MOD;
+          }
+}

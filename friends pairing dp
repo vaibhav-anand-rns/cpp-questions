@@ -1,0 +1,19 @@
+class solution{
+    public:
+          
+          long long friendPairing(int n, vector<long long>& dp) {
+              
+              if(n == 0 || n == 1){
+                  return 1;
+              }
+              if(dp[n] != -1){
+                  return dp[n];
+              }
+              //case1
+              long long single = friendPairing(n-1.dp);
+              //case2
+              long long pair up = (n-1)*friendPairing(n-2,dp);
+              
+              return dp[n] = (single + pair up) % MOD;
+          }
+}

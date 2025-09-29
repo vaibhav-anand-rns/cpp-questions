@@ -1,0 +1,39 @@
+class solution{
+    public:
+          vector<vector<int>> mat;
+          vector<vector<int>> dp;
+          int m,n;
+          
+          int maxpath(int i, int j){
+              
+              if(i == m-1){
+                  return mat[i][j];
+              }
+              //check for boundary
+              if(j<0 || j>n){
+                  return INT_MIN;
+              }
+              
+              if(dp[i][j] != -1){
+                  return dp[i][j];
+              }
+              int down = maxpath(i+1,j);
+              int downleft = maxpath(i+1,j-1);
+              int downright = maxpath(i+1,j+1);
+              
+              dp[i][j] = mat[i][j] + max({down,downleft,downright});
+              
+              return dp[i][j];
+          }
+          int maxpathsum(vector<vector<int>> &matrix){
+              
+              mat = matrix();
+              m = mat.size();
+              n = mat[0].size();
+              int result = INT_MIN;
+              for(int j = 0; j<n; j++){
+                  result = max(result,maxpath(0,j));
+              }
+              return result;
+          }
+}

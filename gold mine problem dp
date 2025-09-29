@@ -1,0 +1,52 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+class Solution {
+    vector<vector<int>> mine;
+    int m, n;
+    vector<vector<int>> memo;
+
+    int goldMine(int i, int j) {
+        // Boundary check for rows and columns
+        if (i < 0 || i >= m || j >= n) return 0;
+
+        if (memo[i][j] != -1) return memo[i][j];
+
+        int right = goldMine(i, j + 1);
+        int rightUp = goldMine(i - 1, j + 1);
+        int rightDown = goldMine(i + 1, j + 1);
+
+        memo[i][j] = mine[i][j] + max({right, rightUp, rightDown});
+        return memo[i][j];
+    }
+
+public:
+    int maxGold(vector<vector<int>>& grid) {
+        mine = grid;
+        m = mine.size();
+        n = mine[0].size();
+        memo.assign(m, vector<int>(n, -1));
+
+        int maxGold = 0;
+        for (int i = 0; i < m; i++) {
+            maxGold = max(maxGold, goldMine(i, 0));
+        }
+        return maxGold;
+    }
+};
+
+int main() {
+    vector<vector<int>> grid = {
+        {1, 3, 1, 5},
+        {2, 2, 4, 1},
+        {5, 0, 2, 3},
+        {0, 6, 1, 2}
+    };
+
+    Solution sol;
+    cout << "Maximum gold collected: " << sol.maxGold(grid) << endl;
+
+    return 0;
+}

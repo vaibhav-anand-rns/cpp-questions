@@ -1,0 +1,39 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <climits>
+using namespace std;
+
+int frogJump(int i, vector<int>& heights, vector<int>& dp, int k) {
+    // Base case: at the first stone, cost is 0
+    if (i == 0) return 0;
+
+    // Memoization check
+    if (dp[i] != -1) return dp[i];
+
+    int minCost = INT_MAX;
+
+    // Try all jumps from i-1, i-2, ..., i-k
+    for (int j = 1; j <= k; j++) {
+        if (i - j >= 0) {
+            int jumpCost = frogJump(i - j, heights, dp, k) + abs(heights[i] - heights[i - j]);
+            minCost = min(minCost, jumpCost);
+        }
+    }
+
+    dp[i] = minCost;
+    return dp[i];
+}
+
+int main() {
+    vector<int> heights = {10, 40, 30, 10, 20}; // Example
+    int k = 3; // Max jump distance
+    int n = heights.size();
+
+    vector<int> dp(n, -1); // Memoization array
+
+    int result = frogJump(n - 1, heights, dp, k);
+    cout << "Minimum cost to reach last stone: " << result << endl;
+
+    return 0;
+}

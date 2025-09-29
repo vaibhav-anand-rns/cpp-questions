@@ -1,0 +1,34 @@
+class solution{
+    
+    public:
+          
+          int robfrom(int i, vector<int> &nums, vector<int> &dp){
+              
+              if(i>=nums.size()){
+                  
+                  return 0;
+              }
+              
+              if(dp[i] != -1){
+                  
+                  return dp[i];
+              }
+              
+              
+                // Rob current house and skip next
+              
+             int robcurrent = nums[i] + robfrom(i+2,nums,dp);
+             
+             //// Skip current house
+             
+             int skipcurrent = robfrom(i+1,nums,dp);
+             dp[i] = max(robcurrent,skipcurrent);
+             return dp[i];
+          
+}
+          int rob(vector<int>& nums){
+              
+              vector<int> memo(nums.size(),-1);
+              return robfrom(0,nums,dp);
+          }
+}

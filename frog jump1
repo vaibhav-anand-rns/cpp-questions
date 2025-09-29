@@ -1,0 +1,26 @@
+class solution{
+    public:
+          
+          int frogJump(int i, vector<int> &heights, vector<int> &dp){
+              
+              if(i == 0){
+                  return 0;
+              }
+              
+              if(dp[i] != -1){
+                  return dp[i];
+              }
+              
+              int jumpone = frogjump(i-1,heights,dp) + abs(heights[i] - heights[i-1]);
+              int jumptwo = INT_MAX;
+              
+              if(i>1){
+                  
+                  int jumptwo = frogjump(i-1,heights,dp) + abs(heights[i] - heights[i-2]);
+                  
+                  
+              }
+              dp[i] = min(jumpone,jumptwo);
+              return dp[i];
+          }
+}

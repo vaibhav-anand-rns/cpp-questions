@@ -1,0 +1,29 @@
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+int distinctSubseq(string s) {
+    int n = s.size();
+    vector<int> dp(n + 1, 0);
+    dp[0] = 1; // empty subsequence
+
+    vector<int> last(256, -1); // store last occurrence of each char
+
+    for (int i = 1; i <= n; i++) {
+        dp[i] = 2 * dp[i - 1];
+        char c = s[i - 1];
+        if (last[c] != -1) {
+            dp[i] -= dp[last[c]];
+        }
+        last[c] = i - 1;
+    }
+
+    return dp[n];
+}
+
+int main() {
+    string s = "abc";
+    cout << "Number of distinct subsequences: " << distinctSubseq(s) << endl;
+    return 0;
+}

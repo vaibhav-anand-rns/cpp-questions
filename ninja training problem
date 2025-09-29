@@ -1,0 +1,25 @@
+class solution{
+    
+    public:
+          
+          int ninjaTraining(int day, int lastActivity, vector<vector<int>>& points, vector<vector<int>>& dp){
+              
+              if(day == points.size()){
+                  return 0;
+              }
+              if(dp[day][lastactivity] != -1){
+                  
+                  return dp[day][lastactivity];
+              }
+              
+              int maxpoints = 0;
+              for(int activity = 0; activity<3; activity++){
+                  
+                  if(activity != lastactivity){
+                      
+                      int point = points[day][activity] + ninjaTraining(day+1,activity,points,dp);
+                  }
+              }
+              return dp[day][lastactivity] = maxpoints;
+          }
+}

@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int maxProfitRec(int i, int canBuy, int cap, vector<int> &prices, vector<vector<vector<int>>> &dp) {
+    int n = prices.size();
+    if (i == n || cap == 0) return 0; // base case
+
+    if (dp[i][canBuy][cap] != -1) return dp[i][canBuy][cap];
+
+    if (canBuy) {
+        // Option 1: Buy today, Option 2: Skip
+        return dp[i][canBuy][cap] = max(
+            -prices[i] + maxProfitRec(i+1, 0, cap, prices, dp),
+            maxProfitRec(i+1, 1, cap, prices, dp)
+        );
+    } else {
+        // Option 1: Sell today, Option 2: Skip
+        return dp[i][canBuy][cap] = max(
+            prices[i] + maxProfitRec(i+1, 1, cap-1, prices, dp),
+            maxProfitRec(i+1, 0, cap, prices, dp)
+        );
+    }
+}
+
+int maxProfit(vector<int> &prices) {
+    int n = prices.size();
+    vector<vector<vector<int>>> dp(n, vector<vector<int>>(2, vector<int>(3, -1))); // cap = 0,1,2
+    return maxProfitRec(0, 1, 2, prices, dp); // start day 0, can buy, 2 transactions left
+}
+
+int main() {
+    vector<int> prices = {3,3,5,0,0,3,1,4};
+    cout << "Maximum Profit = " << maxProfit(prices) << endl;
+    return 0;
+}

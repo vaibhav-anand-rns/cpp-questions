@@ -1,0 +1,47 @@
+class solution{
+    
+    public:
+          
+          bool isallstars(string &p, int j){
+              
+              for(int k = 0 ; k <= j; k++){
+                  
+                  if(p[k] != '*'){
+                      
+                      return false;
+                  }
+                  
+                  
+              }
+              return true;
+          }
+          bool wildcardMatching(int i, int j, string &s, string &p, vector<vector<int>> &dp){
+              
+              if(i<0 && j<0){
+                  
+                  return true;
+                  
+              }
+              if(j<0){
+                  return false;
+              }
+              if(i<0){
+                  return isallstars(p,j);
+              }
+              if(dp[i][j] != -1){
+                  return dp[i][j];
+              }
+              if(s[i] == p[j] || p[j] == '?'){
+                  
+                  return dp[i][j] = wildcardMatching(i-1,j-1,s,p,dp);
+              }
+              else if(p[j] == '*'){
+                  
+                  return dp[i][j] = wildcardMatching(i-1,j,s,p,dp)|| wildcardMatching(i,j-1,s,p,dp);
+                  
+              }
+              else{
+                  return dp[i][j] = false;
+              }
+          }
+}

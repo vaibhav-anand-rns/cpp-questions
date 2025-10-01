@@ -1,0 +1,31 @@
+class solution{
+    
+    public:
+          
+          int maxProfitRec(int i, int canBuy, vector<int> &prices, vector<vector<int>> &dp){
+              
+              int n = prices.size();
+              if(i == n){
+                  return 0;
+              }
+              if(dp[i][canBuy] != -1){
+                  return dp[i][canBuy];
+              }
+              
+              if(canBuy){
+                  // Option 1: Buy today, Option 2: Skip today
+                  
+                  return dp[i][canBuy] = max(prices[i] + maxprofitRec(i+1,0,prices,dp),maxprofitRec(i+1,1,prices,dp));
+              }
+              else{
+                  // Option 1: Sell today, Option 2: Skip today
+                  return dp[i][canBuy] = max(prices[i] + maxprofitRec(i+1,1,prices,dp),maxprofitRec(i+1,0,prices,dp));
+              }
+          }
+          int maxProfit(vector<int> &prices){
+              
+              int n = prices.size();
+              vector<vector<int>> dp(n, vector<int>(2, -1));
+              return maxProfitRec(0, 1, prices, dp);
+          }
+}

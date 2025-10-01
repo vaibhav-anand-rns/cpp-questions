@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int LPS(int i, int j, string &s, vector<vector<int>> &dp) {
+    // Base cases
+    if (i > j) return 0;          // empty substring
+    if (i == j) return 1;         // single character
+
+    if (dp[i][j] != -1) return dp[i][j];
+
+    if (s[i] == s[j])
+        return dp[i][j] = 2 + LPS(i+1, j-1, s, dp);
+    else
+        return dp[i][j] = max(LPS(i+1, j, s, dp),
+                              LPS(i, j-1, s, dp));
+}
+
+int longestPalindromicSubsequence(string s) {
+    int n = s.size();
+    vector<vector<int>> dp(n, vector<int>(n, -1));
+    return LPS(0, n-1, s, dp);
+}
+
+int main() {
+    string s = "bbab";
+    cout << "Length of LPS = " << longestPalindromicSubsequence(s) << endl;
+    return 0;
+}

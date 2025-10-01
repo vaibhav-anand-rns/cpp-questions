@@ -1,0 +1,46 @@
+class solution{
+    
+    public:
+          
+          int n;
+          vector<vector<vector<int>>> dp;
+          
+          int dfs(vector<vector<int>>& grid, int r1, int c1, int r2){
+              
+              int c2 = r1+c1-r2;
+              if(r1>=n || r2>=n || c1>=n || c2>=n){
+                  return false;
+              }
+              
+              if(grid[r1][c1] == -1 || grid[r2][c2] == -1){
+                  
+                  return false;
+              }
+              
+              if(r1 == n-1 && c1 == n-1){
+                  return grid[r1][c1];
+              }
+              
+              // memomization
+              if(dp[r1][c1][r2] != -1){
+                  return dp[r1][c1][r2];
+              }
+              
+              int cherries = grid[r1][c1];
+              if(r1 != r2 && c1 != c2){
+                  cherries += grid[r2][c2];
+              }
+              
+              int best = max({
+               dfs(grid, r1+1, c1, r2+1), // both down
+               dfs(grid, r1, c1+1, r2),   // both right
+               dfs(grid, r1+1, c1, r2),   // r1 down, r2 right
+               dfs(grid, r1, c1+1, r2+1)  // r1 right, r2 down
+        });
+        
+              cherries += best;
+              return[r1][c1][r2] = cherries;
+        
+             
+          }
+}

@@ -1,0 +1,47 @@
+class solution{
+    
+    public:
+          
+          int f(int i, int target, vector<int>& arr, vector<vector<int>>& dp){
+              
+              //base case
+              if(i == 0){
+                  
+                  if(taregt == 0 && arr[i] == 0){
+                      
+                      return 2;
+                  }
+                  if(target == 0 || target == arr[0]){
+                      
+                      return 1;
+                  }
+                  
+                  return 0;
+              }
+              if(dp[i][target] != -1){
+                  
+                  return dp[i][target];
+              }
+              int notake = f(i-1,target,arr,dp);
+              int take = 0;
+              if(arr[i] < target) take{
+                  
+                  f(i-1,target-arr[i],arr,dp);
+                  
+                  
+              }
+              return dp[i][target] = take + not take;
+          }
+          int countPartitionsWithDiff(vector<int>& arr, int d){
+              int n = arr.size();
+              int total = accumulate(arr.begin(),arr.end());
+              if((total+d) % 2 != 0){
+                  
+                  return 0;
+              }
+              int target = (total+d)/2;
+              
+              vector<vector<int>> dp(n, vector<int>(target+1, -1));
+              return f(n-1,target,arr,dp);
+          }
+}

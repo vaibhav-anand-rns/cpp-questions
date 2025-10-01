@@ -1,0 +1,30 @@
+class solution{
+    public:
+          
+          int solve(int i, int W, vector<int>& val, vector<int>& wt, vector<vector<int>>& dp){
+              
+              if(i == 0){
+                  
+                  return (W/wt[0])*val[0];
+              }
+              
+              if(dp[i][w] != -1){
+                  
+                  return dp[i][W];
+              }
+              //not take
+              int solve = nottake(i-1,W,val,wt,dp);
+              int take = -1;
+              if(wt[i] <= W){
+                  
+                  take = val[i]  + solve(i,W-wt[i],val,wt,dp);
+              }
+              return dp[i][W] = max(nottake,take);
+          }
+          
+          int unboundedKnapsack(int n, int W, vector<int>& val, vector<int>& wt){
+              
+              vector<vector<int>> dp(n, vector<int>(W+1, -1));
+              return solve(n-1, W, val, wt, dp);
+          }
+}

@@ -1,0 +1,22 @@
+class solution{
+    public:
+          
+          int maxprofit(vector<int> & prices){
+              int n = prices.size();
+              if(n == 0){
+                  return 0;
+              }
+              int minprice = prices[0]; //minimum price so far
+              int maxprofit = 0;
+              
+              for(int i = 1; i<n; i++){
+                  
+                  // calculate profit if we sell today
+                  int profit = prices[i] - minprice;
+                  maxprofit = max(maxprofit,profit);
+                  //update minprice so far
+                  minprice = min(minprice,prices[i]);
+              }
+              return maxprofit;
+          }
+}

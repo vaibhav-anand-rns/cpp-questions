@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int LCS(int i, int j, string &A, string &B, vector<vector<int>> &dp) {
+    if (i < 0 || j < 0) return 0;
+
+    if (dp[i][j] != -1) return dp[i][j];
+
+    if (A[i] == B[j])
+        return dp[i][j] = 1 + LCS(i-1, j-1, A, B, dp);
+    else
+        return dp[i][j] = max(LCS(i-1, j, A, B, dp),
+                              LCS(i, j-1, A, B, dp));
+}
+
+int minInsertionsToConvertAtoB(string A, string B) {
+    int n = A.size(), m = B.size();
+    vector<vector<int>> dp(n, vector<int>(m, -1));
+    int lcs = LCS(n-1, m-1, A, B, dp);
+    return m - lcs;
+}
+
+int main() {
+    string A = "heap", B = "pea";
+    cout << "Minimum insertions = " << minInsertionsToConvertAtoB(A, B) << endl;
+    return 0;
+}

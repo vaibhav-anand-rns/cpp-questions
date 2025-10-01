@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int LCS_substring(int i, int j, string &s1, string &s2, int count, vector<vector<vector<int>>> &dp) {
+    if (i < 0 || j < 0) return count;
+
+    if (dp[i][j][count] != -1) return dp[i][j][count];
+
+    if (s1[i] == s2[j])
+        return dp[i][j][count] = LCS_substring(i-1, j-1, s1, s2, count+1, dp);
+    else
+        return dp[i][j][count] = max({count,
+                                      LCS_substring(i-1, j, s1, s2, 0, dp),
+                                      LCS_substring(i, j-1, s1, s2, 0, dp)});
+}
+
+int longestCommonSubstring(string s1, string s2) {
+    int n = s1.size(), m = s2.size();
+    vector<vector<vector<int>>> dp(n, vector<vector<int>>(m, vector<int>(min(n,m)+1, -1)));
+    return LCS_substring(n-1, m-1, s1, s2, 0, dp);
+}
+
+int main() {
+    string s1 = "abcde";
+    string s2 = "abfde";
+    cout << "Length of Longest Common Substring = " << longestCommonSubstring(s1, s2) << endl;
+    return 0;
+}

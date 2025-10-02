@@ -1,0 +1,32 @@
+class solution{
+    
+    public:
+          
+          int n;
+          vector<int> dp;
+          int solve(int index, int prev_index, vector<int>& nums) {
+              
+              if(index == n){
+                  return 0;
+              }
+              if(dp[index][prev_index] != -1){
+                  return dp[index][prev_index+1];
+              }
+              //option 1: skip
+              int nottake = solve(index+1,prev_index,nums);
+              //option2: include
+              
+              int take = 0;
+              if(prev_index == -1 || nums[index] > nums[prev_index]){
+                  
+                  int take = 1 + solve(index+1,index,nums);
+              }
+              return dp[index][prev_index+1] = max(int take,int nottake); 
+          }
+           int lengthOfLIS(vector<int>& nums) {
+           n = nums.size();
+           dp.assign(n, vector<int>(n+1, -1));
+           return solve(0, -1, nums);
+           
+           }  
+}

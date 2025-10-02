@@ -1,0 +1,19 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+bool canJump(vector<int>& nums) {
+    int n = nums.size();
+    int farthest = 0;
+
+    for(int i = 0; i < n; i++) {
+        if(i > farthest) return false;      // cannot reach this position
+        farthest = max(farthest, i + nums[i]); // update farthest reachable index
+    }
+
+    return true; // can reach the last index
+}
+
+int main() {
+    vector<int> nums = {2,3,1,1,4};
+    cout << (canJump(nums) ? "true" : "false") << endl;
+}

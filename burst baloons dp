@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int maxCoinsUtil(vector<int>& nums, int i, int j, vector<vector<int>>& dp) {
+    if (i + 1 == j) return 0; // no balloon to burst in between
+    if (dp[i][j] != -1) return dp[i][j];
+
+    int ans = 0;
+    for (int k = i + 1; k < j; k++) {
+        int coins = maxCoinsUtil(nums, i, k, dp) + maxCoinsUtil(nums, k, j, dp) + nums[i]*nums[k]*nums[j];
+        ans = max(ans, coins);
+    }
+
+    return dp[i][j] = ans;
+}
+
+int maxCoins(vector<int>& nums) {
+    vector<int> balloons;
+    balloons.push_back(1);
+    for (int x : nums) balloons.push_back(x);
+    balloons.push_back(1);
+
+    int n = balloons.size();
+    vector<vector<int>> dp(n, vector<int>(n, -1));
+
+    return maxCoinsUtil(balloons, 0, n - 1, dp);
+}
+
+int main() {
+    vector<int> nums = {3,1,5,8};
+    cout << "Maximum coins: " << maxCoins(nums) << endl;
+}

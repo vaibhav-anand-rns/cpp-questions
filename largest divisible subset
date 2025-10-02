@@ -1,0 +1,71 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    int n;
+    vector<vector<int>> dp;
+    
+    // recursive function to compute LDS length
+    int solve(int index, int prev_index, vector<int>& nums) {
+        if (index == n) return 0;
+        
+        if (dp[index][prev_index + 1] != -1)
+            return dp[index][prev_index + 1];
+        
+        // Option 1: skip
+        int notTake = solve(index + 1, prev_index, nums);
+        
+        // Option 2: take (if divisible)
+        int take = 0;
+        if (prev_index == -1 || nums[index] % nums[prev_index] == 0) {
+            take = 1 + solve(index + 1, index, nums);
+        }
+        
+        return dp[index][prev_index + 1] = max(take, notTake);
+    }
+    
+    // reconstruct LDS
+    vector<int> getSubset(vector<int>& nums) {
+        int maxLen = 0, startIndex = -1;
+        
+        // find max LDS length and starting index
+        for (int i = 0; i < n; i++) {
+            int len = solve(i, -1, nums); 
+            if (len > maxLen) {
+                maxLen = len;
+                startIndex = i;
+            }
+        }
+        
+        // rebuild the path
+        vector<int> subset;
+        int prev_index = -1;
+        for (int i = startIndex; i < n; i++) {
+            if ((prev_index == -1 || nums[i] % nums[prev_index] == 0) 
+                && solve(i, prev_index, nums) == maxLen) {
+                subset.push_back(nums[i]);
+                prev_index = i;
+                maxLen--;
+            }
+        }
+        return subset;
+    }
+    
+    vector<int> largestDivisibleSubset(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+        n = nums.size();
+        dp.assign(n, vector<int>(n + 1, -1));
+        return getSubset(nums);
+    }
+};
+
+int main() {
+    Solution sol;
+    vector<int> nums = {1, 2, 3, 8, 4, 12};
+    vector<int> ans = sol.largestDivisibleSubset(nums);
+    
+    cout << "Largest Divisible Subset: ";
+    for (int x : ans) cout << x << " ";
+    cout << endl;
+}

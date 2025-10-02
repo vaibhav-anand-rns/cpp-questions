@@ -1,0 +1,35 @@
+class solution{
+    
+    public:
+          
+          bool ispalindrome(const string &s, int i, int j){
+              
+              while(i<j){
+                  if(s[i++] != s[j--]){
+                      return false;
+                  }
+                  return true;
+              }
+          }
+          // Top-down DP function
+          int minCutsUtil(const string &s, int i, vector<int>& dp){
+              
+              int n = s.size();
+              if( i == n){
+                  return 0;
+              }
+              if(dp[i] != -1){
+                  return dp[i];
+              }
+              int ans = INT_MAX;
+              for(j = i; j<n; j++){
+                  if(ispalindrome(s,i,j)){
+                      int cuts = 1 + minCutsUtil(s,j+1,dp);
+                      ans = min(ans,cuts);
+                  }
+              }
+              
+              return dp[i] = ans;
+          }
+          
+}

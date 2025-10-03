@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+bool checkValidString(string s) {
+    int low = 0, high = 0; // min and max open brackets
+
+    for (char c : s) {
+        if (c == '(') {
+            low++; 
+            high++;
+        } else if (c == ')') {
+            low--; 
+            high--;
+        } else if (c == '*') {
+            low--;  // treat '*' as ')'
+            high++; // treat '*' as '('
+        }
+
+        if (high < 0) return false; // too many closing brackets
+        if (low < 0) low = 0;       // low can't be negative
+    }
+
+    return low == 0; // all open brackets matched
+}
+
+int main() {
+    string s = "(*))";
+    if (checkValidString(s)) cout << "Valid\n";
+    else cout << "Invalid\n";
+    return 0;
+}
